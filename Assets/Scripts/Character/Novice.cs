@@ -87,7 +87,7 @@ public class Novice : Character
         maxHealth += 10;
         health = maxHealth;
         critical += 0.05f;
-        currentExp += 1;
+        CurrentExp += 10;
 
         Debug.Log("전 스테이터스 증가: 공격력 " + attack + ", 방어력 " + defense + ", 체력 " + health + ", 크리티컬 확률 " + critical);
     }

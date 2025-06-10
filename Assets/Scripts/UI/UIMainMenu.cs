@@ -8,7 +8,7 @@ public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject characterInfo;
     [SerializeField] private GameObject menuButton;
-    [SerializeField] private Scrollbar expBar;
+    [SerializeField] private Image expBar;
     [SerializeField] private TextMeshProUGUI characterName;
     [SerializeField] private TextMeshProUGUI characterLevel;
     [SerializeField] private TextMeshProUGUI expText;
@@ -46,6 +46,9 @@ public class UIMainMenu : MonoBehaviour
         expText.text = GameManager.Instance.Player.CurrentExp.ToString() + " / " + GameManager.Instance.Player.MaxExp.ToString();
         goldText.text = GameManager.Instance.Player.Gold.ToString();
         characterDescription.text = GameManager.Instance.Player.CharacterDescription;
+
+        // 경험치 바 갱신
+        expBar.fillAmount = (float)GameManager.Instance.Player.CurrentExp / GameManager.Instance.Player.MaxExp;
     }
 
     public void HideMenuButton()

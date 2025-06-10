@@ -715,14 +715,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8316641880138075715, guid: e2bf4e15fb5b03640aa71ae934e3aa9e, type: 3}
-      propertyPath: expBar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8316641880138075715, guid: e2bf4e15fb5b03640aa71ae934e3aa9e, type: 3}
-      propertyPath: expText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8382420348961742613, guid: e2bf4e15fb5b03640aa71ae934e3aa9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

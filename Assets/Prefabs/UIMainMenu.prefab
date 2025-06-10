@@ -120,10 +120,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterInfo: {fileID: 7853884638369452805}
   menuButton: {fileID: 1774509911743134440}
-  expBar: {fileID: 0}
+  expBar: {fileID: 5531954637936499884}
   characterName: {fileID: 6753495698061670522}
   characterLevel: {fileID: 3783382936506393334}
-  expText: {fileID: 0}
+  expText: {fileID: 7828198602329965297}
   goldText: {fileID: 8025150293698051047}
   characterDescription: {fileID: 3598198021481605662}
 --- !u!1 &1177315277952038664
@@ -738,11 +738,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: cfedf2957aa651249b76c442ea3a5e79, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
