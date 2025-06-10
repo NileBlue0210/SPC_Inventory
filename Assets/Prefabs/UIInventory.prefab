@@ -1299,6 +1299,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70f264e73fbb4c44a541d14d441b795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slots: []
+  inventoryWindow: {fileID: 3856330047721950037}
+  slotPanel: {fileID: 673498208707587961}
+  selectedItemIcon: {fileID: 6244217656943187073}
+  selectedItemName: {fileID: 7102899240728465142}
+  selectedItemDescription: {fileID: 1776389679454602761}
+  selectedItemAttack: {fileID: 1734966021880889106}
+  selectedItemDefense: {fileID: 2277526962579760270}
+  selectedItemHealth: {fileID: 9018171470865129588}
+  selectedItemCritical: {fileID: 8073376804000269834}
+  useButton: {fileID: 6835703946305438550}
+  equipButton: {fileID: 1155331457460075344}
+  unEquipButton: {fileID: 533223399301318369}
+  dropButton: {fileID: 662563210079431901}
 --- !u!1 &4296961223070246560
 GameObject:
   m_ObjectHideFlags: 0
