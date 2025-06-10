@@ -37,18 +37,20 @@ public class UIManager : MonoBehaviour
         
     }
 
-    void ShowMainMenu()
+    public void ShowMainMenu()
     {
         mainMenu.Show();
     }
 
-    void ShowStatusMenu()
+    public void ShowStatusMenu()
     {
         mainMenu.HideMenuButton();
+        status.Show();
     }
 
-    void ShowInventoryMenu()
+    public void ShowInventoryMenu()
     {
         mainMenu.HideMenuButton();
+        inventory.Show();
     }
 }

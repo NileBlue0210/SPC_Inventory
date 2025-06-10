@@ -15,4 +15,9 @@ public class UIInventory : MonoBehaviour
     {
         
     }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
 }

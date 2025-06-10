@@ -11,7 +11,18 @@ public class Character : MonoBehaviour
     protected string characterDescription;
     public string CharacterName => characterName;
     public int CharacterLevel => characterLevel;
-    public int CurrentExp => currentExp;
+    public int CurrentExp {
+        get => currentExp;
+        set
+        {
+            currentExp = value;
+
+            if (currentExp >= maxExp)
+            {
+                LevelUp();
+            }
+        }
+    }
     public int MaxExp => maxExp;
     public string CharacterDescription => characterDescription;
 
@@ -45,5 +56,14 @@ public class Character : MonoBehaviour
     protected virtual void Update()
     {
         
+    }
+
+    protected virtual void LevelUp()
+    {
+        characterLevel++;
+
+        // 레벨업에 따른 경험치 요구량 증가 및 경험치 초기화
+        currentExp = 0;
+        maxExp *= characterLevel;
     }
 }

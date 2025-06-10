@@ -32,7 +32,11 @@ public class UIMainMenu : MonoBehaviour
     public void Show()
     {
         characterInfo.SetActive(true);
-        menuButton.SetActive(true);
+
+        if (!menuButton.activeSelf)
+        {
+            menuButton.SetActive(true);
+        }
     }
 
     public void UpdateCharacterInfo()
