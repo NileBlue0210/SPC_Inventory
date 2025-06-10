@@ -41,14 +41,14 @@ public class UIMainMenu : MonoBehaviour
 
     public void UpdateCharacterInfo()
     {
-        characterName.text = GameManager.Instance.Player.CharacterName;
-        characterLevel.text = GameManager.Instance.Player.CharacterLevel.ToString();
-        expText.text = GameManager.Instance.Player.CurrentExp.ToString() + " / " + GameManager.Instance.Player.MaxExp.ToString();
-        goldText.text = GameManager.Instance.Player.Gold.ToString();
-        characterDescription.text = GameManager.Instance.Player.CharacterDescription;
+        characterName.text = GameManager.Instance.Player.controller.CharacterName;
+        characterLevel.text = GameManager.Instance.Player.controller.CharacterLevel.ToString();
+        expText.text = GameManager.Instance.Player.controller.CurrentExp.ToString() + " / " + GameManager.Instance.Player.controller.MaxExp.ToString();
+        goldText.text = GameManager.Instance.Player.controller.Gold.ToString();
+        characterDescription.text = GameManager.Instance.Player.controller.CharacterDescription;
 
         // 경험치 바 갱신
-        expBar.fillAmount = (float)GameManager.Instance.Player.CurrentExp / GameManager.Instance.Player.MaxExp;
+        expBar.fillAmount = (float)GameManager.Instance.Player.controller.CurrentExp / GameManager.Instance.Player.controller.MaxExp;
     }
 
     public void HideMenuButton()

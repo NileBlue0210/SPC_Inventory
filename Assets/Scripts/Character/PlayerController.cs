@@ -1,27 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine;
 
-public class Novice : Character
+public class PlayerController : MonoBehaviour
 {
-    protected override void Awake()
+    [Header("character info")]
+    protected string characterName;
+    protected int characterLevel;
+    protected int currentExp;
+    protected int maxExp;
+    protected string characterDescription;
+    public string CharacterName => characterName;
+    public int CharacterLevel => characterLevel;
+    public int CurrentExp
     {
-        base.Awake();
+        get => currentExp;
+        set
+        {
+            currentExp = value;
 
-        GameManager.Instance.Player = this;
+            if (currentExp >= maxExp)
+            {
+                LevelUp();
+            }
+        }
+    }
+    public int MaxExp => maxExp;
+    public string CharacterDescription => characterDescription;
 
+    [Header("character stats")]
+    protected int attack;
+    protected int defense;
+    protected int health;
+    protected int maxHealth;
+    protected float critical;
+    public int Attack => attack;
+    public int Defense => defense;
+    public int Health => health;
+    public int MaxHealth => maxHealth;
+    public float Critical => critical;
+
+    [Header("character property")]
+    protected List<Item> inventory;
+    protected int gold;
+    public int Gold => gold;
+
+    private void Awake()
+    {
         SetCharacter();
     }
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        
     }
 
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        
     }
 
     private void SetCharacter()
@@ -93,11 +130,15 @@ public class Novice : Character
     }
 
     [Button]
-    protected override void LevelUp()
+    private void LevelUp()
     {
-        base.LevelUp();
+        characterLevel++;
 
-        // 레벨업 시 스테이터스 증가
+        // 레벨업에 따른 경험치 요구량 증가 및 경험치 초기화
+        currentExp = 0;
+        maxExp *= characterLevel;
+
+        // 레벨업에 따른 스테이터스 증가
         attack += 2;
         defense += 1;
         maxHealth += 10;

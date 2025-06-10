@@ -1,16 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /*
+    public ItemSlot[] slots;
+
+    public GameObject inventoryWindow;
+    public Transform slotPanel;
+
+    public Image selectedItemIcon;
+    public TextMeshProUGUI selectedItemName;
+    public TextMeshProUGUI selectedItemDescription;
+    public TextMeshProUGUI selectedItemAttack;
+    public TextMeshProUGUI selectedItemDefense;
+    public TextMeshProUGUI selectedItemHealth;
+    public TextMeshProUGUI selectedItemCritical;
+
+    public GameObject useButton;
+    public GameObject equipButton;
+    public GameObject unEquipButton;
+    public GameObject dropButton;
+    */
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

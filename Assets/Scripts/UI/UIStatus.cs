@@ -40,9 +40,9 @@ public class UIStatus : MonoBehaviour
 
     public void UpdateStatus()
     {
-        attackText.text = GameManager.Instance.Player.Attack.ToString();
-        defenseText.text = GameManager.Instance.Player.Defense.ToString();
-        healthText.text = GameManager.Instance.Player.Health.ToString();
-        criticalText.text = GameManager.Instance.Player.Critical.ToString() + "%";
+        attackText.text = GameManager.Instance.Player.controller.Attack.ToString();
+        defenseText.text = GameManager.Instance.Player.controller.Defense.ToString();
+        healthText.text = GameManager.Instance.Player.controller.Health.ToString();
+        criticalText.text = GameManager.Instance.Player.controller.Critical.ToString() + "%";
     }
 }
