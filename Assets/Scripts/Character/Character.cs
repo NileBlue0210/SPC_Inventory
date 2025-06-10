@@ -9,6 +9,11 @@ public class Character : MonoBehaviour
     protected int currentExp;
     protected int maxExp;
     protected string characterDescription;
+    public string CharacterName => characterName;
+    public int CharacterLevel => characterLevel;
+    public int CurrentExp => currentExp;
+    public int MaxExp => maxExp;
+    public string CharacterDescription => characterDescription;
 
     [Header("character stats")]
     protected int attack;
@@ -16,10 +21,16 @@ public class Character : MonoBehaviour
     protected int health;
     protected int maxHealth;
     protected float critical;
+    public int Attack => attack;
+    public int Defense => defense;
+    public int Health => health;
+    public int MaxHealth => maxHealth;
+    public float Critical => critical;
 
     [Header("character property")]
     protected List<Item> inventory;
     protected int gold;
+    public int Gold => gold;
 
     protected virtual void Awake()
     {

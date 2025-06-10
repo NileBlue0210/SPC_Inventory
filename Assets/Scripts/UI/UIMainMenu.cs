@@ -24,6 +24,28 @@ public class UIMainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // 메인 메뉴가 활성화되는 도중, 플레이어 정보를 계속해서 업데이트한다 ( gold, exp 등의 정보를 갱신 )
+        // gold와 exp등을 얻는 주체는 Player지만 정보를 표시하는 주체는 UIMainMenu이므로 갱신은 이곳에서 실시간으로 이루어지도록 설계
+        UpdateCharacterInfo();
+    }
+
+    public void Show()
+    {
+        characterInfo.SetActive(true);
+        menuButton.SetActive(true);
+    }
+
+    public void UpdateCharacterInfo()
+    {
+        characterName.text = GameManager.Instance.Player.CharacterName;
+        characterLevel.text = GameManager.Instance.Player.CharacterLevel.ToString();
+        expText.text = GameManager.Instance.Player.CurrentExp.ToString() + " / " + GameManager.Instance.Player.MaxExp.ToString();
+        goldText.text = GameManager.Instance.Player.Gold.ToString();
+        characterDescription.text = GameManager.Instance.Player.CharacterDescription;
+    }
+
+    public void HideMenuButton()
+    {
+        menuButton.SetActive(false);
     }
 }

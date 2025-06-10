@@ -8,15 +8,15 @@ public class Novice : Character
     protected override void Awake()
     {
         base.Awake();
+
+        GameManager.Instance.Player = this;
+
+        SetCharacter();
     }
 
     protected override void Start()
     {
         base.Start();
-
-        GameManager.Instance.Player = this;
-
-        SetCharacter();
     }
 
     protected override void Update()

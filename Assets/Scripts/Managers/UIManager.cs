@@ -28,12 +28,27 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ShowMainMenu();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void ShowMainMenu()
+    {
+        mainMenu.Show();
+    }
+
+    void ShowStatusMenu()
+    {
+        mainMenu.HideMenuButton();
+    }
+
+    void ShowInventoryMenu()
+    {
+        mainMenu.HideMenuButton();
     }
 }
