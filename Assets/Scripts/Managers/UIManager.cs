@@ -11,6 +11,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIStatus status;
     [SerializeField] private UIInventory inventory;
 
+    public UIMainMenu MainMenu { get { return mainMenu; } }
+    public UIStatus Status { get { return status; } }
+    public UIInventory Inventory { get { return inventory; } }
+
     private void Awake()
     {
         if (instance == null)

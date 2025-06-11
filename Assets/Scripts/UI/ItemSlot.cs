@@ -21,4 +21,14 @@ public class ItemSlot : MonoBehaviour
     {
         
     }
+
+    public void Set()
+    {
+
+    }
+
+    public void Clear()
+    {
+
+    }
 }

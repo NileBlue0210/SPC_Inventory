@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public float Critical => critical;
 
     [Header("character property")]
-    protected List<Item> inventory;
+    protected List<ItemData> inventory;
     protected int gold;
     public int Gold => gold;
 
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         critical = 15f;
         gold = 0;
 
-        inventory = new List<Item>();
+        inventory = new List<ItemData>();
     }
 
     [Button]
@@ -92,10 +92,11 @@ public class PlayerController : MonoBehaviour
 
     [Button]
     /// <summary>
-    /// 테스트용 아이템 획득 메소드
+    /// 아이템 획득 메소드
     /// </summary>
-    private void GetNoviceSword()
+    private void GetItem()
     {
+        // 테스트용 아이템 생성 로직
         ItemData noviceSwordData = ScriptableObject.CreateInstance<ItemData>();
 
         noviceSwordData.itemName = "Novice Sword";
@@ -104,13 +105,17 @@ public class PlayerController : MonoBehaviour
         noviceSwordData.itemDefense = 0;
         noviceSwordData.itemHealth = 0;
         noviceSwordData.itemCritical = 0.05f;
+        noviceSwordData.itemType = ItemType.Weapon;
+        noviceSwordData.itemIcon = null;
+        noviceSwordData.CanStack = false;
+        noviceSwordData.maxStack = 1;
 
-        Item noviceSword = new GameObject("Novice Sword").AddComponent<Item>();
-        noviceSword.itemData = noviceSwordData;
+        inventory.Add(noviceSwordData);
 
-        inventory.Add(noviceSword);
+        Debug.Log("아이템 획득: " + noviceSwordData.itemName);
 
-        Debug.Log("아이템 획득: " + noviceSword.itemData.itemName);
+        // UIManager를 통해 인벤토리 UI 갱신
+        UIManager.Instance.Inventory.AddItem(noviceSwordData);
     }
 
     [Button]

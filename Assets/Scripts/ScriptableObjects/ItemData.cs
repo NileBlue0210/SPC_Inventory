@@ -18,5 +18,6 @@ public class ItemData : ScriptableObject
     public int itemDefense;
     public int itemHealth;
     public float itemCritical;
+    public bool CanStack; // 아이템이 중복 소지 가능한지 여부
     public int maxStack;    // 최대 소지수
 }
