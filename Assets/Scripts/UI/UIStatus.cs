@@ -13,7 +13,7 @@ public class UIStatus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.SetActive(false);    // 시작 시 비활성화
     }
 
     // Update is called once per frame

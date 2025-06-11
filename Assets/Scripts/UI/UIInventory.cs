@@ -9,6 +9,7 @@ public class UIInventory : MonoBehaviour
     public ItemSlot[] slots;
 
     public GameObject inventoryWindow;
+    public GameObject selectedItemWindow;
     public Transform slotPanel;
 
     public Image selectedItemIcon;
@@ -27,12 +28,17 @@ public class UIInventory : MonoBehaviour
     private PlayerController controller;
     private PlayerCondition condition;
 
+    ItemData selectedItem;
+    int selectedItemIndex = 0;  // 선택된 아이템 인덱스
+    int currentEquipItemIndex;  // 현재 장착된 아이템 인덱스
+
     void Start()
     {
         controller = GameManager.Instance.Player.controller;
         condition = GameManager.Instance.Player.condition;
 
-        // inventoryWindow.SetActive(false);
+        CloseSelectedItemWindow();  // 선택 아이템 설명 창을 시작 시 비활성화
+        Hide(); // 인벤토리 창을 시작 시 비활성화
 
         slots = new ItemSlot[slotPanel.childCount];
 
@@ -58,7 +64,24 @@ public class UIInventory : MonoBehaviour
 
     public void Hide()
     {
+        if (selectedItemWindow.activeSelf)
+        {
+            CloseSelectedItemWindow();
+        }
+
+        ClearSelectedItemWindow();
+
         gameObject.SetActive(false);
+    }
+
+    public void OpenSelectedItemWindow()
+    {
+        selectedItemWindow.SetActive(true);
+    }
+
+    public void CloseSelectedItemWindow()
+    {
+        selectedItemWindow.SetActive(false);
     }
 
     public void BackToMainMenu()
@@ -87,7 +110,7 @@ public class UIInventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)  // 아이템 슬롯 수 만큼 반복
         {
-            if (slots[i] != null)   // 해당 아이템 칸이 비어있다면 해당 칸에 아이템을 배치한다
+            if (slots[i].item != null)   // 해당 아이템 칸이 비어있다면 해당 칸에 아이템을 배치한다
             {
                 slots[i].Set();
             }
@@ -139,17 +162,44 @@ public class UIInventory : MonoBehaviour
 
     public void UseItem()
     {
+        if (selectedItem.itemType == ItemType.Consumable)
+        {
 
+        }
     }
 
     public void EquipItem()
     {
+        slots[selectedItemIndex].isEquipped = true;
+        currentEquipItemIndex = selectedItemIndex;  // to do : 복수 장착 시스템을 고려한 수정 필요 ( 배열으로 만들어둘 필요가 있음 )
 
+        // 플레이어의 스탯을 아이템에 맞게 업데이트
+        controller.Attack += selectedItem.itemAttack;
+        controller.Defense += selectedItem.itemDefense;
+        controller.MaxHealth += selectedItem.itemHealth;
+        controller.Critical += selectedItem.itemCritical;
+
+        UpdateUI();
+
+        SelectItem(selectedItemIndex);  // 아이템 장착 후, 장착 아이템 설명 창 리로드
     }
 
-    public void UnEquipItem()
+    public void UnEquipItem(int index)
     {
+        slots[index].isEquipped = false;
 
+        // 플레이어의 스탯을 아이템에 맞게 업데이트
+        controller.Attack -= slots[index].item.itemAttack;
+        controller.Defense -= slots[index].item.itemDefense;
+        controller.MaxHealth -= slots[index].item.itemHealth;
+        controller.Critical -= slots[index].item.itemCritical;
+
+        UpdateUI();
+
+        if (selectedItemIndex == index)
+        {
+            SelectItem(selectedItemIndex);  // 아이템 장착 후, 장착 아이템 설명 창 리로드
+        }
     }
 
     public void DropItem()
@@ -192,5 +242,91 @@ public class UIInventory : MonoBehaviour
     private void OnFailedToUpdateInventory(ItemData data)
     {
         // to do : 재획득용 리스트를 만들어 재획득 가능하게 해보자
+    }
+
+    public void SelectItem(int index)
+    {
+        if (slots[index].item == null) return;
+        /*
+        if (selectedItemWindow.activeSelf && selectedItemIndex == index)  // 선택한 아이템을 다시 누르면, 선택 아이템 창을 비활성화하고 초기화
+        {
+            ClearSelectedItemWindow();
+            CloseSelectedItemWindow();
+
+            return;
+        }
+        */
+
+        // 선택 아이템 설명 창 활성화
+        OpenSelectedItemWindow();
+
+        selectedItem = slots[index].item;
+        selectedItemIndex = index;
+
+        selectedItemIcon.sprite = selectedItem.itemIcon;
+
+        // to do: 소비 아이템일 경우의 처리 추가 ( ItemStat표시용 UI를 비활성화하고, 아이템 효과에 따른 스테이터스를 표시하도록 개수가 필요 )
+        selectedItemName.text = selectedItem.itemName;
+        selectedItemDescription.text = selectedItem.itemDescription;
+        selectedItemAttack.text = selectedItem.itemAttack.ToString();
+        selectedItemDefense.text = selectedItem.itemDefense.ToString();
+        selectedItemHealth.text = selectedItem.itemHealth.ToString();
+        selectedItemCritical.text = selectedItem.itemCritical.ToString("F2") + "%";
+
+        // 아이템 타입에 따라 버튼 활성화
+        useButton.SetActive(selectedItem.itemType == ItemType.Consumable);
+        equipButton.SetActive(selectedItem.itemType == ItemType.Equipable && !slots[index].isEquipped);
+        unEquipButton.SetActive(selectedItem.itemType == ItemType.Equipable && slots[index].isEquipped);
+        dropButton.SetActive(true);
+    }
+
+    /// <summary>
+    /// 소비 아이템 사용 메소드
+    /// </summary>
+    public void OnUseButton()
+    {
+
+    }
+
+    /// <summary>
+    /// 선택된 아이템 슬롯의 아이템 삭제
+    /// </summary>
+    public void OnDeleteButton()
+    {
+        if (selectedItem == null) return;
+
+        slots[selectedItemIndex].quantity--;
+
+        if (slots[selectedItemIndex].isEquipped)
+        {
+            UnEquipItem(selectedItemIndex);  // 아이템 삭제 시, 장착된 아이템은 해제
+        }
+
+        if (slots[selectedItemIndex].quantity <= 0)
+        {
+            selectedItem = null;
+            slots[selectedItemIndex].item = null;
+            selectedItemIndex = -1;
+
+            ClearSelectedItemWindow();
+            CloseSelectedItemWindow();
+        }
+
+        UpdateUI();
+    }
+
+    public void OnEquipButton()
+    {
+        if (slots[currentEquipItemIndex].isEquipped)
+        {
+            UnEquipItem(currentEquipItemIndex);  // 현재 장착된 아이템을 해제
+        }
+
+        EquipItem();
+    }
+
+    public void OnUnEquipButton()
+    {
+        UnEquipItem(selectedItemIndex);
     }
 }

@@ -35,11 +35,13 @@ public class PlayerController : MonoBehaviour
     protected int health;
     protected int maxHealth;
     protected float critical;
-    public int Attack => attack;
-    public int Defense => defense;
+    public int Attack { get => attack; set => attack = value; }
+    public int Defense { get => defense; set => defense = value; }
+
     public int Health => health;
-    public int MaxHealth => maxHealth;
-    public float Critical => critical;
+    public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+
+    public float Critical { get => critical; set => critical = value; }
 
     [Header("character property")]
     protected List<ItemData> inventory;
@@ -97,25 +99,29 @@ public class PlayerController : MonoBehaviour
     private void GetItem()
     {
         // 테스트용 아이템 생성 로직
-        ItemData noviceSwordData = ScriptableObject.CreateInstance<ItemData>();
+        GameObject woodSword = Resources.Load<GameObject>("ItemDictionary/WoodSword");
+        ItemData woodSwordData;
 
-        noviceSwordData.itemName = "Novice Sword";
-        noviceSwordData.itemDescription = "초보자를 위한 기본 검입니다.";
-        noviceSwordData.itemAttack = 10;
-        noviceSwordData.itemDefense = 0;
-        noviceSwordData.itemHealth = 0;
-        noviceSwordData.itemCritical = 0.05f;
-        noviceSwordData.itemType = ItemType.Weapon;
-        noviceSwordData.itemIcon = null;
-        noviceSwordData.CanStack = false;
-        noviceSwordData.maxStack = 1;
+        if (woodSword == null)
+        {
+            Debug.LogError("아이템을 로드할 수 없습니다. 경로를 확인하세요.");
 
-        inventory.Add(noviceSwordData);
+            return;
+        }
+        else
+        {
+            woodSwordData = woodSword.GetComponent<Item>().itemData;
 
-        Debug.Log("아이템 획득: " + noviceSwordData.itemName);
+            if (woodSwordData != null)
+            {
+                inventory.Add(woodSwordData);
 
-        // UIManager를 통해 인벤토리 UI 갱신
-        UIManager.Instance.Inventory.AddItem(noviceSwordData);
+                Debug.Log("아이템 획득: " + woodSwordData.itemName);
+
+                // UIManager를 통해 인벤토리 UI 갱신
+                UIManager.Instance.Inventory.AddItem(woodSwordData);
+            }
+        }
     }
 
     [Button]

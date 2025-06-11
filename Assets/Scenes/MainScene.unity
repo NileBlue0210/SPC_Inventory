@@ -638,6 +638,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3654967713781817236, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654967713781817236, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654967713781817236, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654967713781817236, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430665016251991390, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430665016251991390, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430665016251991390, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430665016251991390, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304031570265959670, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304031570265959670, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304031570265959670, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304031570265959670, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259087635070709752, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259087635070709752, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259087635070709752, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259087635070709752, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8444245374825238636, guid: 19cd1bb426a543b4383bf00cb95a8981, type: 3}
       propertyPath: m_Name
       value: UIStatus
