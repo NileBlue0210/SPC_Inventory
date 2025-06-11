@@ -10,7 +10,9 @@ public class UIInventory : MonoBehaviour
 
     public GameObject inventoryWindow;
     public GameObject selectedItemWindow;
+    public GameObject slot;
     public Transform slotPanel;
+    public TextMeshProUGUI remainSlotCountText;
 
     public Image selectedItemIcon;
     public TextMeshProUGUI selectedItemName;
@@ -31,6 +33,8 @@ public class UIInventory : MonoBehaviour
     ItemData selectedItem;
     int selectedItemIndex = 0;  // 선택된 아이템 인덱스
     int currentEquipItemIndex;  // 현재 장착된 아이템 인덱스
+    int usedItemSlotCount = 0;  // 사용된 아이템 슬롯 수
+    [SerializeField] int maxInventorySlot;
 
     void Start()
     {
@@ -40,16 +44,15 @@ public class UIInventory : MonoBehaviour
         CloseSelectedItemWindow();  // 선택 아이템 설명 창을 시작 시 비활성화
         Hide(); // 인벤토리 창을 시작 시 비활성화
 
+        AddInventorySlot(maxInventorySlot);
+
         slots = new ItemSlot[slotPanel.childCount];
 
-        for (int i = 0; i < slots.Length; i++)
-        {
-            slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
-            slots[i].index = i;
-            slots[i].inventory = this;
-        }
+        UpdateSlotData();
 
         ClearSelectedItemWindow();
+
+        remainSlotCountText.text = $"{usedItemSlotCount} / {maxInventorySlot.ToString()}";  // 남은 슬롯 수 초기화
     }
 
     void Update()
@@ -108,17 +111,24 @@ public class UIInventory : MonoBehaviour
 
     private void UpdateUI()
     {
+        usedItemSlotCount = 0;  // 사용된 아이템 슬롯 수 초기화
+
         for (int i = 0; i < slots.Length; i++)  // 아이템 슬롯 수 만큼 반복
         {
             if (slots[i].item != null)   // 해당 아이템 칸이 비어있다면 해당 칸에 아이템을 배치한다
             {
                 slots[i].Set();
+
+                // 2번씩 호출되고 있다.
+                usedItemSlotCount++;  // 사용된 아이템 슬롯 수 증가
             }
             else
             {
                 slots[i].Clear();
             }
         }
+
+        remainSlotCountText.text = $"{usedItemSlotCount} / {maxInventorySlot.ToString()}";  // 남은 슬롯 수 업데이트
     }
 
     /// <summary>
@@ -127,6 +137,15 @@ public class UIInventory : MonoBehaviour
     /// <param name="data"></param>
     public void AddItem(ItemData data)
     {
+        if (usedItemSlotCount >= maxInventorySlot)   // 인벤토리 슬롯이 가득 찼을 경우, 아이템 획득 실패 처리
+        {
+            Debug.LogWarning("인벤토리 슬롯이 가득 찼습니다. 아이템을 추가할 수 없습니다.");
+
+            OnFailedToUpdateInventory(data);
+
+            return;
+        }
+
         // 복수 소지 가능한 아이템일 경우
         if (data.CanStack)
         {
@@ -328,5 +347,32 @@ public class UIInventory : MonoBehaviour
     public void OnUnEquipButton()
     {
         UnEquipItem(selectedItemIndex);
+    }
+
+    /// <summary>
+    /// 인벤토리에 새로운 슬롯을 추가하는 메소드
+    /// </summary>
+    /// <param name="count"></param>
+    public void AddInventorySlot(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject newSlot = Instantiate(slot); // 새로운 슬롯 추가
+
+            newSlot.transform.SetParent(slotPanel, false);  // slotPanel의 자식으로 설정, 위치 초기화
+            slots = slotPanel.GetComponentsInChildren<ItemSlot>();  // 새로 생성된 슬롯을 포함하여 slots 배열 업데이트
+        }
+
+        UpdateSlotData();
+    }
+
+    private void UpdateSlotData()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
+            slots[i].index = i;
+            slots[i].inventory = this;
+        }
     }
 }
